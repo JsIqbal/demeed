@@ -3,6 +3,7 @@ const async = require("async");
 
 async function init() {
 	const config = require(path.join(process.cwd(), "src/config"));
+    
 	await config.initEnvironmentVariables();
 
 	const sequelize = require(path.join(process.cwd(), "/src/config/lib/sequelize.js"));
