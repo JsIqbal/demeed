@@ -1,5 +1,9 @@
 module.exports.start = () => {
-    const app = require('./express')();
+	const app = require("./express")();
 
-    app.listen(3000, () => console.log("Listening on port 3000"));
-}
+	// console.log(app.settings);
+
+	app.listen(app.get("port"), () => {
+		console.log("Server running on port %s in %s mode...", app.get("port"), app.settings.env);
+	});
+};
