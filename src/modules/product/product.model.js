@@ -32,6 +32,10 @@ const Product = sequelize.define(
             allowNull: false,
 			type: DataTypes.STRING,
         },
+        image: {
+            allowNull: false,
+			type: DataTypes.STRING,
+        },
 		created_by: {
 			type: DataTypes.UUID,
 		},
@@ -46,6 +50,5 @@ const Product = sequelize.define(
 		updatedAt: "updated_at",
 	}
 );
-
 
 module.exports = Product;

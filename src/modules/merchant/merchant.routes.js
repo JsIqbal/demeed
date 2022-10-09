@@ -9,8 +9,8 @@ const { login, logout, signUp, getUsers, updateUser, deleteUser } = require(path
 const validate = require(path.join(process.cwd(), "src/modules/core/middlewares/validate.middleware"));
 
 module.exports = (app) => {
-    app.post("/api/merchants/signup", validate(registerSchema), signUp);
+    app.post("/api/merchants/registration", validate(registerSchema), signUp);
     app.post("/api/merchants/login", validate(loginSchema), login);
+    app.post("/api/merchants/logout", MerchantStrategy, logout);
     app.get("/api/merchants", MerchantStrategy, getUsers);
-    // app.post("/api/merchants/add-products", MerchantStrategy);
 };

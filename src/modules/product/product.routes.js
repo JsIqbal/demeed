@@ -1,6 +1,6 @@
 const path = require("path");
 
-const upload = require('../../config/lib/multer');
+const upload = require(path.join(process.cwd(), 'src/modules/core/middlewares/multer.middleware'));
 
 const MerchantStrategy = require(path.join(process.cwd(), "src/modules/merchant/merchant.authentication.middleware"));
 
@@ -15,5 +15,6 @@ module.exports = (app) => {
         .get(MerchantStrategy, products)
         .post(MerchantStrategy, validate(registerSchema) , product);
 
-        app.post('/api/merchants/add-products/upload-images', MerchantStrategy, upload.array('image'), image);
+        app.route('/api/merchants/add-products/upload-images')
+            .post(MerchantStrategy, upload.array('image'), image);
 };

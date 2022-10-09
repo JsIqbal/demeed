@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const Product = require(path.join(process.cwd(), "src/modules/product/product.model"));
 const Merchant = require(path.join(process.cwd(), "src/modules/merchant/merchant.model.js"));
-const Image = require('./productWithImage.model');
+const Image = require(path.join(process.cwd(), 'src/modules/product/productWithImage.model'));
 
 const products = async (req, res) => {
     try {
@@ -24,11 +24,11 @@ const product = async (req, res) => {
         const id = req.user.id;
         console.log("---------------------------------------",id);
 
-        const { name, price, description, discount, stock_quantity } = req.body;
+        const { name, price, description, discount, stock_quantity, image } = req.body;
 
         const [ permission, created ] = await Product.findOrCreate({
             where: { name },
-            defaults: { price, description, discount, stock_quantity, created_by: id, updated_by: id }
+            defaults: { price, description, discount, stock_quantity, image, created_by: id, updated_by: id }
         });
 
         if(!created) {
@@ -45,6 +45,8 @@ const product = async (req, res) => {
 
 const image = async (req,res) => {
     try {
+        const id = req.user.id;
+
         const uploader = async (path) => await cloudinary.uploads(path, 'images');
 
         const urls = [];
@@ -66,7 +68,7 @@ const image = async (req,res) => {
                 try {
                     const [ image, created ] = await Image.findOrCreate({
                         where: { url: p },
-                        defaults: { url: p }
+                        defaults: { url: p, updated_by: id, created_by: id }
                     });
                     if(!created) {
                         return res.status(409).send("Permission is already created.");
