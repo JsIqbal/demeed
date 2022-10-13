@@ -1,19 +1,13 @@
 const path = require("path");
-
-const upload = require('../../config/lib/multer');
-
 const MerchantStrategy = require(path.join(process.cwd(), "src/modules/merchant/merchant.authentication.middleware"));
-
-const { registerSchema } = require(path.join(process.cwd(), "src/modules/product/product.schema.js"));
-
-const { products, product, image } = require(path.join(process.cwd(), "src/modules/product/product.controller"));
-
 const validate = require(path.join(process.cwd(), "src/modules/core/middlewares/validate.middleware"));
+const format = require(path.join(process.cwd(), "src/modules/core/middlewares/format.middleware"));
+const { productSchema } = require(path.join(process.cwd(), "src/modules/product/product.schema.js"));
+const { createProduct, updateProduct } = require(path.join(process.cwd(), "src/modules/product/product.controller"));
 
 module.exports = (app) => {
-    app.route("/api/merchants/add-products")
-        .get(MerchantStrategy, products)
-        .post(MerchantStrategy, validate(registerSchema) , product);
+    app.route("/api/merchants/products")
+        .post(MerchantStrategy, format, validate(productSchema), createProduct);
 
-        app.post('/api/merchants/add-products/upload-images', MerchantStrategy, upload.array('image'), image);
+    app.put("/api/merchants/products/:id", MerchantStrategy, format, updateProduct);
 };
