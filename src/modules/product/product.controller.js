@@ -1,91 +1,77 @@
 const path = require("path");
-
-const cloudinary = require(path.join(process.cwd(), 'src/config/lib/cloudinary.js'));
-const fs = require('fs');
-
+const storageService = require(path.join(process.cwd(), "src/modules/core/storage/storage.service"));
 const Product = require(path.join(process.cwd(), "src/modules/product/product.model"));
-const Merchant = require(path.join(process.cwd(), "src/modules/merchant/merchant.model.js"));
-const Image = require('./productWithImage.model');
+const File = require(path.join(process.cwd(), "src/modules/core/storage/file.model"));
 
-const products = async (req, res) => {
+const createProduct = async (req, res) => {
     try {
-        const products = await Product.findAll();
+        const { name, price, description, discount, stock_quantity, image } = req.body;
 
-        res.status(200).send(products);
-    } catch (err) {
-        console.log(err);
-
-        res.status(500).send("Internal server error.")
-    };
-};
-
-const product = async (req, res) => {
-    try {
-        const id = req.user.id;
-        console.log("---------------------------------------",id);
-
-        const { name, price, description, discount, stock_quantity } = req.body;
-
-        const [ permission, created ] = await Product.findOrCreate({
-            where: { name },
-            defaults: { price, description, discount, stock_quantity, created_by: id, updated_by: id }
+        const product = await Product.create({
+            name,
+            price, 
+            description,
+            discount, 
+            stock_quantity, 
+            created_by: req.user.id, 
+            updated_by: req.user.id 
         });
 
-        if(!created) {
-            return res.status(409).send("Product is already created.");
+        if (req.files) {
+            await Promise.all(req.files.map(async file => {
+                const uploadOptions = {
+                    folder: "demeed/products",
+                    use_filename: true,
+                    fileName: file.path
+                };
+
+                const response = await storageService.upload(uploadOptions);
+                await File.create({
+                    name: response.url,
+                    owner_id: product.id,
+                    table_name: "products",
+                    created_by: req.user.id,
+                    updated_by: req.user.id
+                });
+            }));
         };
 
-        res.status(201).send(permission);
+        const updatedProduct = await Product.findOne({
+            where: { id: product.id },
+            include: [
+                {
+                    model: File,
+                    as: "files"
+                }
+            ]
+        });
+
+        res.status(201).send(updatedProduct);
     } catch (err) {
         console.log(err);
-
         res.status(500).send("Internal server error.")
     }
 };
 
-const image = async (req,res) => {
-    try {
-        const uploader = async (path) => await cloudinary.uploads(path, 'images');
+const updateProduct = async (req, res) => {
+	try {
+		const id = req.params.id;
 
-        const urls = [];
-    
-        const files = req.files;
-    
-        for (const file of files) {
-            const { path } = file;
-    
-            const newPath = await uploader(path);
-    
-            urls.push(newPath);
-    
-            fs.unlinkSync(path);
+        const product = await Product.findOne({ where: { id } });
+        console.log
+		if (req.files) {
+			const fileUrl = await uploadImages(req);
+            console.log(fileUrl);
+			await product.update({ image: fileUrl });
 
-            urls.forEach(async (url) => {
-                const p = url.url;
-                
-                try {
-                    const [ image, created ] = await Image.findOrCreate({
-                        where: { url: p },
-                        defaults: { url: p }
-                    });
-                    if(!created) {
-                        return res.status(409).send("Permission is already created.");
-                    };
-                    res.status(201).send(image);
-                }
-                catch (err) {
-                    console.log(err);
-                    res.status(500).send("Internal Server Error.");
-                }
-            })
-            
-        }
-    }
-    catch (err) {
-        res.status(500).send("Internal Server Error");
-    }
-}
+		}
+        return res.status(200).json(product);
 
-module.exports.product = product;
-module.exports.products = products;
-module.exports.image = image;
+	} catch (err) {
+		console.log(err);
+		res.status(500).send("Internal server error.");
+	}
+};
+
+module.exports.createProduct = createProduct;
+module.exports.updateProduct = updateProduct;

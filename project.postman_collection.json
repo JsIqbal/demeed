@@ -1,20 +1,20 @@
 {
 	"info": {
-		"_postman_id": "d4594cae-58d3-480a-b2a6-c4434c8c324d",
-		"name": "project",
+		"_postman_id": "58c84884-6664-490a-9ca7-9c9cd2bde50c",
+		"name": "demeed",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Admin",
+			"name": "merchant",
 			"item": [
 				{
-					"name": "getAdmins",
+					"name": "get merchants",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admins",
+							"raw": "http://localhost:3000/api/merchants",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,20 +22,20 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"admins"
+								"merchants"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "adminSignUp",
+					"name": "merchant sing up",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jsiqbal2@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"iqbal@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admins/signup",
+							"raw": "http://localhost:3000/api/merchants/registration",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -51,21 +51,21 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"admins",
-								"signup"
+								"merchants",
+								"registration"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "adminSignIn",
+					"name": "merchant sing in",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jsiqbal@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"iqbal@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,15 +73,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admins/login",
+							"raw": "http://localhost:4000/api/merchants/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"api",
-								"admins",
+								"merchants",
 								"login"
 							]
 						}
@@ -89,12 +89,21 @@
 					"response": []
 				},
 				{
-					"name": "logOut",
+					"name": "merchant logout",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/admins/logout",
+							"raw": "http://localhost:3000/api/merchants/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -102,7 +111,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"admins",
+								"merchants",
 								"logout"
 							]
 						}
@@ -110,7 +119,58 @@
 					"response": []
 				},
 				{
-					"name": "getProfile",
+					"name": "get profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/merchants/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"merchants",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "service",
+			"item": [
+				{
+					"name": "all services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permission",
+			"item": [
+				{
+					"name": "get all permission",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -127,7 +187,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admins/profile",
+							"raw": "http://localhost:3000/api/permissions",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -135,8 +195,87 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"admins",
-								"profile"
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create permission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"permission 10\",\r\n    \"title\": \"some\",\r\n    \"description\": \"Hello world\",\r\n    \"services\": [\"22099304-a6f9-48b0-929f-c2fa969bbbea\", \"4e29aa56-557c-432b-b33c-0e237fe30c47\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/permissions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete permission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/permissions/77608699-7470-4ac2-bc1c-9f16f91d9d4a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"permissions",
+								"77608699-7470-4ac2-bc1c-9f16f91d9d4a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update permission",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"permission 100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/permissions/f3bdce9d-703c-4e83-b523-c313b89e45b4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"permissions",
+								"f3bdce9d-703c-4e83-b523-c313b89e45b4"
 							]
 						}
 					},
@@ -145,16 +284,61 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "service",
 			"item": [
 				{
-					"name": "signup",
+					"name": "get service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "get profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create profile",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jsiqbl@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"profile description\",\r\n    \"permissions\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -162,12 +346,117 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/signup",
+							"raw": "http://localhost:5000/api/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
+							"path": [
+								"api",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"permission-set 100\",\r\n    \"description\": \"permission-set 1000 description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profiles/2d47f5dc-6606-499e-8531-f0318840280c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profiles",
+								"2d47f5dc-6606-499e-8531-f0318840280c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/profiles/0bc8f345-6e24-4626-b50c-5e0f77d4e84e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profiles",
+								"0bc8f345-6e24-4626-b50c-5e0f77d4e84e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"amanullhazoha@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
 							"path": [
 								"api",
 								"users",
@@ -178,20 +467,51 @@
 					"response": []
 				},
 				{
-					"name": "users",
+					"name": "update user",
 					"request": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/users",
+							"raw": "http://localhost:5000/api/users/cbd1fe56-ab88-4345-b30c-20c00525143c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
-								"users"
+								"users",
+								"cbd1fe56-ab88-4345-b30c-20c00525143c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/users/74bb350a-acdb-4b16-8f60-de1c0378a7ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"74bb350a-acdb-4b16-8f60-de1c0378a7ed"
 							]
 						}
 					},
@@ -204,7 +524,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"js@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"demeed@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,50 +548,17 @@
 					"response": []
 				},
 				{
-					"name": "profile",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/profile",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "logout",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users/logout",
+							"raw": "http://localhost:5000/api/users/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"users",
@@ -284,37 +571,16 @@
 			]
 		},
 		{
-			"name": "delivaryMan",
+			"name": "product",
 			"item": [
 				{
-					"name": "users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/delivaryMans/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"delivaryMans",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "signup",
+					"name": "createProduct",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jghastt@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Dell XPS 7\",\r\n    \"price\":\"1500 usd\", \r\n    \"description\":\"High Configured Laptop for Engineers.\", \r\n    \"discount\":\"10%\", \r\n    \"image\":\"http://res.cloudinary.com/dichs8d9b/image/upload/v1665313992/images/c1vpcjege8ixoghs2wgm.jpg\",\r\n    \"stock_quantity\":\"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +588,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/delivaryMans/signup",
+							"raw": "http://localhost:3000/api/merchants/add-products",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -330,82 +596,18 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"delivaryMans",
-								"signup"
+								"merchants",
+								"add-products"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"javascript@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/delivaryMans/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"delivaryMans",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "profile",
+					"name": "update-product-image",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/delivaryMans/profile",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"delivaryMans",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "logout",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/delivaryMans/logout",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"delivaryMans",
-								"logout"
-							]
-						}
+						"header": []
 					},
 					"response": []
 				}

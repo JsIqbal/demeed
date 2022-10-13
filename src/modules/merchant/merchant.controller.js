@@ -67,6 +67,12 @@ const signUp = async (req, res) => {
     };
 };
 
+const logout = (req, res) => {
+	res.clearCookie("merchant_token");
+	res.send("Logged out.");
+};
+
 module.exports.signUp = signUp;
 module.exports.login = login;
 module.exports.getUsers = getUsers;
+module.exports.logout = logout;
